@@ -1,0 +1,15 @@
+{#	> 'tag_manager' is an instance of TagLinkGroupManager #}
+{% if tag_manager %}
+	<hr />
+	{% for tg in tag_manager.tag_groups %}
+		{% if tg.get_related_object_cnt > 0 %}
+			<b>{{ tg.tag }}</b> &nbsp; <span style="font-size:80%;">({{ tg.get_related_object_cnt }}) link{{ tg.get_related_object_cnt|pluralize }} found.</span>
+			<ul>
+			{% for related_obj in tg.related_objects %}
+				<li><a href="{{ related_obj.get_absolute_url }}">{{ related_obj }}</a></li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endfor %}
+
+{% endif %}
